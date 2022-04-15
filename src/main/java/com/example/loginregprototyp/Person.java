@@ -1,5 +1,7 @@
 package com.example.loginregprototyp;
 
+import java.sql.Connection;
+
 public abstract class Person {
     private String firstname;
     private String lastname;
