@@ -30,7 +30,7 @@ public class LoginController {
     private TextField username_textfield;
 
     @FXML
-    void onDoneButtonEvent(ActionEvent event) {
+    public void onDoneButtonEvent(ActionEvent event) {
         try {
             verifyTextFields();
             usernameCheck(username_textfield.getText());
@@ -43,7 +43,7 @@ public class LoginController {
     }
 
     @FXML
-    void onRegisterButtonEvent(ActionEvent event) {
+    public void onRegisterButtonEvent(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(RegisterController.class.getResource("registerView.fxml"));
             Stage stage = new Stage();
@@ -54,7 +54,7 @@ public class LoginController {
         }
     }
 
-    public boolean verifyTextFields() {
+    public void verifyTextFields() {
         String username = username_textfield.getText();
         String password = password_textfield.getText();
 
@@ -67,16 +67,13 @@ public class LoginController {
             username_textfield.clear();
             password_textfield.clear();
         }
-
-        return true;
     }
 
-    public boolean usernameCheck(String username) throws SQLException {
+    public void usernameCheck(String username) throws SQLException {
         Connection con = DatabaseConnection.getConnection();
         PreparedStatement ps;
         ResultSet rs;
         String query = "select * from users where username=?";
-        boolean username_exists = false;
 
         try {
             ps = con.prepareStatement(query);
@@ -84,7 +81,7 @@ public class LoginController {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                username_exists = true;
+
             } else {
                 Alert wrongUsernameAlert = new Alert(Alert.AlertType.ERROR);
                 wrongUsernameAlert.setHeaderText("Falscher Benutzername!");
@@ -96,15 +93,13 @@ public class LoginController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return username_exists;
     }
 
-    public boolean passwordCheck(String password) throws SQLException {
+    public void passwordCheck(String password) throws SQLException {
         Connection con = DatabaseConnection.getConnection();
         PreparedStatement ps;
         ResultSet rs;
         String query = "select * from users where password=?";
-        boolean password_exists = false;
 
         try {
             ps = con.prepareStatement(query);
@@ -112,7 +107,7 @@ public class LoginController {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                password_exists = true;
+
             } else {
                 Alert wrongPasswordAlert = new Alert(Alert.AlertType.ERROR);
                 wrongPasswordAlert.setHeaderText("Falsches Passwort!");
@@ -124,6 +119,5 @@ public class LoginController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return password_exists;
     }
 }
