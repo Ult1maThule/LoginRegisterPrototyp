@@ -40,11 +40,15 @@ public abstract class Person {
         this.password = password;
     }
 
-    public void setFirstname() {
+    public void setFirstname(String firstname) {
         this.firstname=firstname;
     }
 
-    public void setEmail() {this.email=email;}
+    public void setEmail(String email) {
+        this.email=email;
+    }
 
-    public void setLastname() {this.lastname=lastname;}
+    public void setLastname(String lastname) {
+        this.lastname=lastname;
+    }
 }
