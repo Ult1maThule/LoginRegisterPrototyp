@@ -1,24 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.loginregprototyp.RegisterView">
+<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.loginregprototyp.RegisterView">
    <children>
-      <Label layoutX="225.0" layoutY="41.0" text="Projektname">
+      <Label layoutX="131.0" layoutY="41.0" text="Projektname">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Label layoutX="169.0" layoutY="77.0" text="Erstellen Sie ein neues Projektname-Konto">
+      <Label layoutX="69.0" layoutY="77.0" text="Erstellen Sie ein neues Projektname-Konto">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="76.0" layoutY="136.0" promptText="Vorname" />
-      <TextField layoutX="375.0" layoutY="136.0" />
+      <TextField layoutX="25.0" layoutY="140.0" prefHeight="25.0" prefWidth="150.0" promptText="Vorname" />
+      <TextField layoutX="225.0" layoutY="140.0" prefHeight="25.0" prefWidth="150.0" promptText="Nachname" />
+      <TextField alignment="CENTER" layoutX="25.0" layoutY="200.0" prefHeight="25.0" prefWidth="350.0" promptText="Username" />
+      <TextField alignment="CENTER" layoutX="25.0" layoutY="250.0" prefHeight="25.0" prefWidth="350.0" promptText="Email" />
+      <PasswordField layoutX="225.0" layoutY="300.0" prefHeight="25.0" prefWidth="150.0" promptText="Passwort bestätigen" />
+      <PasswordField layoutX="25.0" layoutY="300.0" prefHeight="25.0" prefWidth="150.0" promptText="Passwort" />
+      <CheckBox layoutX="25.0" layoutY="325.0" mnemonicParsing="false" text="Passwort anzeigen" />
+      <Button layoutX="175.0" layoutY="437.0" mnemonicParsing="false" text="Weiter" />
    </children>
 </AnchorPane>
