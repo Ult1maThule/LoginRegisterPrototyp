@@ -6,6 +6,6 @@ import javafx.scene.control.TextField;
 public class RegisterController {
 
     @FXML
-    private TextField vorname_textfield;
+    private TextField vornameTextfield;
 
 }
