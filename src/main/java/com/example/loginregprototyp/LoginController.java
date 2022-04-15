@@ -1,6 +1,11 @@
 package com.example.loginregprototyp;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,23 +13,45 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LoginController {
-    @FXML
-    private TextField username_textfield;
-
-    @FXML
-    private PasswordField password_textfield;
-
-    @FXML
-    private Button done_button;
 
     @FXML
     private CheckBox checkbox;
 
     @FXML
+    private Button done_button;
+
+    @FXML
+    private PasswordField password_textfield;
+
+    @FXML
     private Button register_button;
 
-    public LoginController() {
+    @FXML
+    private TextField username_textfield;
 
+    @FXML
+    void onDoneButtonEvent(ActionEvent event) {
+        try {
+            verifyTextFields();
+            usernameCheck(username_textfield.getText());
+            passwordCheck(password_textfield.getText());
+
+            //TODO Weiterleitung zur Mainpage
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void onRegisterButtonEvent(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(RegisterController.class.getResource("registerView.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(fxmlLoader.load()));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean verifyTextFields() {
@@ -100,4 +127,3 @@ public class LoginController {
         return password_exists;
     }
 }
-

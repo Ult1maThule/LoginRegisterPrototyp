@@ -25,8 +25,8 @@
       <Label layoutX="183.0" layoutY="252.0" text="Benutzername" />
       <Label layoutX="198.0" layoutY="307.0" text="Passwort" />
       <CheckBox fx:id="checkbox" layoutX="246.0" layoutY="348.0" mnemonicParsing="false" text="Daten merken?" />
-      <Button fx:id="done_button" layoutX="262.0" layoutY="380.0" mnemonicParsing="false" text="Bestätigen" />
+      <Button fx:id="done_button" layoutX="262.0" layoutY="380.0" mnemonicParsing="false" onAction="#onDoneButtonEvent" text="Bestätigen" />
       <Label layoutX="250.0" layoutY="421.0" text="Noch kein Konto?" />
-      <Button fx:id="register_button" layoutX="257.0" layoutY="452.0" mnemonicParsing="false" text="Registrieren" />
+      <Button fx:id="register_button" layoutX="257.0" layoutY="452.0" mnemonicParsing="false" onAction="#onRegisterButtonEvent" text="Registrieren" />
    </children>
 </AnchorPane>
