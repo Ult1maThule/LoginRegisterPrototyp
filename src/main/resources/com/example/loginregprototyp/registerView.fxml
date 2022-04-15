@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.loginregprototyp.RegisterView">
+   <children>
+      <Label layoutX="225.0" layoutY="41.0" text="Projektname">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="169.0" layoutY="77.0" text="Erstellen Sie ein neues Projektname-Konto">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="76.0" layoutY="136.0" promptText="Vorname" />
+      <TextField layoutX="375.0" layoutY="136.0" />
+   </children>
+</AnchorPane>
