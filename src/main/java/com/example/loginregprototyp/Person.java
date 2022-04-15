@@ -44,7 +44,11 @@ public abstract class Person {
         this.firstname=firstname;
     }
 
-    public void setEmail(String email) {this.email=email;}
+    public void setEmail(String email) {
+        this.email=email;
+    }
 
-    public void setLastname(String lastname) {this.lastname=lastname;}
+    public void setLastname(String lastname) {
+        this.lastname=lastname;
+    }
 }

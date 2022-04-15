@@ -17,11 +17,7 @@ public class User extends Person {
         return dateOfBirth;
     }
 
-
-
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
-
-
 }
