@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="529.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.loginregprototyp.LoginController">
    <children>
       <Label layoutX="228.0" layoutY="141.0" text="Projektname">
@@ -21,13 +20,13 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="297.0" layoutY="248.0" />
-      <PasswordField layoutX="297.0" layoutY="303.0" />
+      <TextField fx:id="username_textfield" layoutX="297.0" layoutY="248.0" />
+      <PasswordField fx:id="password_textfield" layoutX="297.0" layoutY="303.0" />
       <Label layoutX="183.0" layoutY="252.0" text="Benutzername" />
       <Label layoutX="198.0" layoutY="307.0" text="Passwort" />
-      <CheckBox layoutX="246.0" layoutY="348.0" mnemonicParsing="false" text="Daten merken?" />
-      <Button layoutX="262.0" layoutY="380.0" mnemonicParsing="false" text="Bestätigen" />
+      <CheckBox fx:id="checkbox" layoutX="246.0" layoutY="348.0" mnemonicParsing="false" text="Daten merken?" />
+      <Button fx:id="done_button" layoutX="262.0" layoutY="380.0" mnemonicParsing="false" text="Bestätigen" />
       <Label layoutX="250.0" layoutY="421.0" text="Noch kein Konto?" />
-      <Button layoutX="257.0" layoutY="452.0" mnemonicParsing="false" text="Registrieren" />
+      <Button fx:id="register_button" layoutX="257.0" layoutY="452.0" mnemonicParsing="false" text="Registrieren" />
    </children>
 </AnchorPane>

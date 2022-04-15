@@ -12,7 +12,7 @@ public class LoginController {
     private TextField username_textfield;
 
     @FXML
-    private TextField password_textfield;
+    private PasswordField password_textfield;
 
     @FXML
     private Button done_button;
