@@ -6,63 +6,29 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.InputMethodEvent;
 import javafx.stage.Stage;
 
 import java.util.EventListener;
+import java.util.regex.Pattern;
 
 public class RegisterController {
-
-
-    @FXML
-    private Label adminBestätigungLabel;
-
-    @FXML
-    private PasswordField confirmPasswordfield;
 
     @FXML
     private Button continueButton;
 
     @FXML
-    private Label emailTakenError;
+    private Label emailTakenError, nameErrorLabel, passwordErrorLabel, usernameTakenLabel, adminBestätigungLabel;
 
     @FXML
-    private TextField emailTextfield;
-
-    @FXML
-    private TextField lastnameTextfield;
-
-    @FXML
-    private Label nameErrorLabel;
-
-    @FXML
-    private Label passwordErrorLabel;
-
-    @FXML
-    private PasswordField setPasswordfield;
+    private PasswordField setPasswordfield, confirmPasswordfield;
 
     @FXML
     private CheckBox showPasswordCheckBox;
 
     @FXML
-    private Label usernameTakenLabel;
-
-    @FXML
-    private TextField usernameTextfield;
-
-    @FXML
-    private TextField firstnameTextfield;
-
-    @FXML
-    private TextField showPasswordTextfield;
-
-    @FXML
-    private TextField showConfirmPasswordTextfield;
+    private TextField emailTextfield, lastnameTextfield, usernameTextfield, firstnameTextfield, showPasswordTextfield,showConfirmPasswordTextfield;
 
 
 
@@ -70,15 +36,16 @@ public class RegisterController {
         checkNameFormat(firstnameTextfield);
         checkNameFormat(lastnameTextfield);
         toggleVisiblePassword(null);
+        checkEmailAvailabilityAndRights(emailTextfield);
 
     }
 
     @FXML
     public void onContinueButtonEvent(ActionEvent event) {
-        Stage stage = (Stage) continueButton.getScene().getWindow();
-        stage.close();
+            registerAlert();
+            registerPerson();
     }
-
+    @FXML
     public void comparePassword(ActionEvent Event){
         if(setPasswordfield.getText().equals(confirmPasswordfield.getText())&& showPasswordTextfield.getText().equals(showConfirmPasswordTextfield.getText())){
             passwordErrorLabel.setText("");
@@ -88,9 +55,9 @@ public class RegisterController {
         }
     }
 
-    private void comparePassword(TextField plain, PasswordField hidden){
+    public void registerPerson(){}
 
-    }
+
 
     private void checkNameFormat(TextField name){
         name.textProperty().addListener(new ChangeListener<String>() {
@@ -99,7 +66,7 @@ public class RegisterController {
                 if(!name.getText().matches("[a-zA-Z]+")){
                     nameErrorLabel.setText("Haben Sie Ihren Namen richtig eingegeben?");
                 } else {
-                    nameErrorLabel.setText(" ");
+                    nameErrorLabel.setText("");
                 }
             }
         });
@@ -139,13 +106,63 @@ public class RegisterController {
         name.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                //prüfe on Email stimmt
+                String pattern = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+                if(Pattern.compile(pattern).matcher(name.getText()).matches()){
+                emailTakenError.setText("");
+                } else {
+                    emailTakenError.setText("Dies ist keine gültige E-Mail Addresse !");
+                }
                 //Datenbank: prüfe ob existiert --> neue Methode
-                emailTakenError.setText("Die E-Mail-Adresse wird bereits verwendet !");
+               // emailTakenError.setText("Die E-Mail-Adresse wird bereits verwendet !");
                 //Datenbank: prüfe ob Email auf Whitelist
-                adminBestätigungLabel.setText("Hinweis: Sie melden sich als ein Admin an");
+                //adminBestätigungLabel.setText("Hinweis: Sie melden sich als ein Admin an");
             }
         });
     }
+
+    private boolean isEmptyField(TextField field){
+        if(field.getText().equals("")){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isEmptyPasswordfield(PasswordField field){
+        if(field.getText().equals("")){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkErrormessage(Label errormessage){
+        if(errormessage.getText()!=""){
+            return true;
+        }
+        return false;
+    }
+
+    private void registerAlert(){
+        if(isEmptyField(firstnameTextfield)||isEmptyField(lastnameTextfield)||isEmptyField(usernameTextfield)||isEmptyField(emailTextfield)||isEmptyPasswordfield(setPasswordfield)||isEmptyPasswordfield(confirmPasswordfield)){
+            Alert emptyFieldAlert = new Alert(Alert.AlertType.ERROR);
+            emptyFieldAlert.setHeaderText("Ein oder mehrere Felder sind leer!");
+            emptyFieldAlert.setContentText("Bitte alle Felder ausfüllen!");
+            emptyFieldAlert.showAndWait();
+        } else if(checkErrormessage(usernameTakenLabel)||checkErrormessage(emailTakenError)||checkErrormessage(nameErrorLabel)||checkErrormessage(passwordErrorLabel)){
+            Alert errorMessageAlert = new Alert(Alert.AlertType.ERROR);
+            errorMessageAlert.setHeaderText("Fehler beim registrieren!");
+            errorMessageAlert.setContentText("Bitte überprüfen Sie Ihre Eingaben!");
+            errorMessageAlert.showAndWait();
+        } else {
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setHeaderText("Registrierung erfolgreich!");
+            successAlert.setContentText("Sie haben erfolgreich ein Projektname-Konto erstellt!");
+            successAlert.showAndWait();
+            Stage stage = (Stage) continueButton.getScene().getWindow();
+            stage.close();
+        }
+    }
+
 
 }
 
