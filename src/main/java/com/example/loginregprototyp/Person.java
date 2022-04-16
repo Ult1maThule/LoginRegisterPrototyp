@@ -10,6 +10,9 @@ public abstract class Person {
     private String password;
 
     public Person(String firstname,String lastname,String username, String email, String password) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
         this.username = username;
         this.password = password;
     }
