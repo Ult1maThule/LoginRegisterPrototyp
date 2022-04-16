@@ -54,7 +54,7 @@ public class RegisterController {
                String password  = setPasswordfield.getText();
                Admin a = new Admin(firstname,lastname,username,email,password);
                registerAdmin(a);
-               successAlert();
+               Alerts.successAlert(continueButton);
 
             }
 
@@ -180,29 +180,15 @@ public class RegisterController {
     private void errorAlert(){
         if(isEmptyField(firstnameTextfield)||isEmptyField(lastnameTextfield)||isEmptyField(usernameTextfield)||isEmptyField(emailTextfield)||isEmptyPasswordfield(setPasswordfield)||isEmptyPasswordfield(confirmPasswordfield)){
             errorAlertExecuted=true;
-            Alert emptyFieldAlert = new Alert(Alert.AlertType.ERROR);
-            emptyFieldAlert.setHeaderText("Ein oder mehrere Felder sind leer!");
-            emptyFieldAlert.setContentText("Bitte alle Felder ausfüllen!");
-            emptyFieldAlert.showAndWait();
+            Alerts.emptyFieldsAlert();
         } else if(checkErrormessage(usernameTakenLabel)||checkErrormessage(emailTakenError)||checkErrormessage(nameErrorLabel)||checkErrormessage(passwordErrorLabel)||checkErrormessage(usernameTakenLabel)){
             errorAlertExecuted=true;
-            Alert errorMessageAlert = new Alert(Alert.AlertType.ERROR);
-            errorMessageAlert.setHeaderText("Fehler beim registrieren!");
-            errorMessageAlert.setContentText("Bitte überprüfen Sie Ihre Eingaben!");
-            errorMessageAlert.showAndWait();
+            Alerts.errorMessagesOpenAlert();
+
         }
     }
 
-    private void successAlert(){
 
-            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-            successAlert.setHeaderText("Registrierung erfolgreich!");
-            successAlert.setContentText("Sie haben erfolgreich ein Projektname-Konto erstellt!");
-            successAlert.showAndWait();
-            Stage stage = (Stage) continueButton.getScene().getWindow();
-            stage.close();
-
-    }
 
     private void emailCheck(String email) throws SQLException {
         Connection con = DatabaseConnection.getConnection();
