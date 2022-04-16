@@ -54,7 +54,14 @@ public class LoginController {
         }
     }
 
-    public void verifyTextFields() {
+    private void giveSQLAlert() {
+        Alert sqlconnectionError = new Alert(Alert.AlertType.ERROR);
+        sqlconnectionError.setHeaderText("Fehler beim Verbinden mit Datenbank!");
+        sqlconnectionError.setContentText("Überprüfen Sie die Verbindung zur Datenbank auf Fehler!");
+        sqlconnectionError.showAndWait();
+    }
+
+    private void verifyTextFields() {
         String username = username_textfield.getText();
         String password = password_textfield.getText();
 
@@ -69,7 +76,7 @@ public class LoginController {
         }
     }
 
-    public void usernameCheck(String username) throws SQLException {
+    private void usernameCheck(String username) throws SQLException {
         Connection con = DatabaseConnection.getConnection();
         PreparedStatement ps;
         ResultSet rs;
@@ -91,11 +98,11 @@ public class LoginController {
                 username_textfield.clear();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            giveSQLAlert();
         }
     }
 
-    public void passwordCheck(String password) throws SQLException {
+    private void passwordCheck(String password) throws SQLException {
         Connection con = DatabaseConnection.getConnection();
         PreparedStatement ps;
         ResultSet rs;
@@ -117,7 +124,7 @@ public class LoginController {
                 password_textfield.clear();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            giveSQLAlert();
         }
     }
 }
