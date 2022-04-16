@@ -69,6 +69,7 @@ public class RegisterController {
     public void initialize(){
         checkNameFormat(firstnameTextfield);
         checkNameFormat(lastnameTextfield);
+        toggleVisiblePassword(null);
 
     }
 
@@ -76,6 +77,19 @@ public class RegisterController {
     public void onContinueButtonEvent(ActionEvent event) {
         Stage stage = (Stage) continueButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void comparePassword(ActionEvent Event){
+        if(setPasswordfield.getText().equals(confirmPasswordfield.getText())&& showPasswordTextfield.getText().equals(showConfirmPasswordTextfield.getText())){
+            passwordErrorLabel.setText("");
+        }
+        else{
+            passwordErrorLabel.setText("Keine Übereinstimmung !");
+        }
+    }
+
+    private void comparePassword(TextField plain, PasswordField hidden){
+
     }
 
     private void checkNameFormat(TextField name){
