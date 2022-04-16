@@ -215,10 +215,10 @@ public class RegisterController {
             ps.setString(1, email);
             rs = ps.executeQuery();
 
-            if (rs.next()) {
+            if (!rs.next()) {
 
             } else {
-              // emailTakenError.setText("Die Email-Addresse ist bereits vergeben");
+              emailTakenError.setText("Die Email-Addresse ist bereits vergeben");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -236,11 +236,12 @@ public class RegisterController {
             ps.setString(1, username);
             rs = ps.executeQuery();
 
-            if (rs.next()) {
-
-            } else {
-              //  usernameTakenLabel.setText("Der Username ist bereits vergeben");
+            if (!rs.next()) {
+                usernameTakenLabel.setText("");
+            } else{
+                usernameTakenLabel.setText("Der Username ist bereits vergeben");
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
