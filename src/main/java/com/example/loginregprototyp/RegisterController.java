@@ -4,12 +4,15 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.InputMethodEvent;
+import javafx.stage.Stage;
 
 import java.util.EventListener;
 
@@ -60,6 +63,12 @@ public class RegisterController {
     public void initialize(){
        checkNameFormat(firstnameTextfield);
        checkNameFormat(lastnameTextfield);
+    }
+
+    @FXML
+    public void onContinueButtonEvent(ActionEvent event) {
+       Stage stage = (Stage) continueButton.getScene().getWindow();
+       stage.close();
     }
 
     private void checkNameFormat(TextField name){
