@@ -7,10 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class LoginController {
 
@@ -32,7 +29,10 @@ public class LoginController {
     @FXML
     public void onDoneButtonEvent(ActionEvent event) {
         try {
-            verifyTextFields();
+            if (verifyTextFields()) {
+
+            }
+
             usernameCheck(username_textfield.getText());
             passwordCheck(password_textfield.getText());
 
@@ -61,11 +61,17 @@ public class LoginController {
         sqlconnectionError.showAndWait();
     }
 
-    private void verifyTextFields() {
+    private void giveEmptyTextfieldAlert() {
+
+    }
+
+    private boolean verifyTextFields() {
         String username = username_textfield.getText();
         String password = password_textfield.getText();
+        boolean textfield_empty = false;
 
         if (username.equals("") || password.equals("")) {
+            textfield_empty = true;
             Alert emptyFieldAlert = new Alert(Alert.AlertType.ERROR);
             emptyFieldAlert.setHeaderText("Ein oder mehrere Felder sind leer!");
             emptyFieldAlert.setContentText("Bitte alle Felder ausfüllen!");
@@ -74,13 +80,16 @@ public class LoginController {
             username_textfield.clear();
             password_textfield.clear();
         }
+
+        return textfield_empty;
     }
 
-    private void usernameCheck(String username) throws SQLException {
+    private boolean usernameCheck(String username) throws SQLException {
         Connection con = DatabaseConnection.getConnection();
         PreparedStatement ps;
         ResultSet rs;
         String query = "select * from users where username=?";
+        boolean wrong_username = true;
 
         try {
             ps = con.prepareStatement(query);
@@ -88,7 +97,7 @@ public class LoginController {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-
+                wrong_username = false;
             } else {
                 Alert wrongUsernameAlert = new Alert(Alert.AlertType.ERROR);
                 wrongUsernameAlert.setHeaderText("Falscher Benutzername!");
@@ -100,13 +109,16 @@ public class LoginController {
         } catch (SQLException e) {
             giveSQLAlert();
         }
+
+        return wrong_username;
     }
 
-    private void passwordCheck(String password) throws SQLException {
+    private boolean passwordCheck(String password) throws SQLException {
         Connection con = DatabaseConnection.getConnection();
         PreparedStatement ps;
         ResultSet rs;
         String query = "select * from users where password=?";
+        boolean wrong_password = true;
 
         try {
             ps = con.prepareStatement(query);
@@ -114,7 +126,7 @@ public class LoginController {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-
+                wrong_password = false;
             } else {
                 Alert wrongPasswordAlert = new Alert(Alert.AlertType.ERROR);
                 wrongPasswordAlert.setHeaderText("Falsches Passwort!");
@@ -126,5 +138,7 @@ public class LoginController {
         } catch (SQLException e) {
             giveSQLAlert();
         }
+
+        return wrong_password;
     }
 }

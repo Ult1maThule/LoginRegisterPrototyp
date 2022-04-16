@@ -47,7 +47,7 @@ public class RegisterController {
     }
 
     @FXML
-    public void onContinueButtonEvent(ActionEvent event)  {
+    public void onContinueButtonEvent(ActionEvent event) {
             errorAlert();
             if(!errorAlertExecuted){
                String firstname = firstnameTextfield.getText();
@@ -62,7 +62,7 @@ public class RegisterController {
 
     }
     @FXML
-    public void comparePassword(ActionEvent Event){
+    public void comparePassword(ActionEvent Event) {
         if(setPasswordfield.getText().equals(confirmPasswordfield.getText())&& showPasswordTextfield.getText().equals(showConfirmPasswordTextfield.getText())){
             passwordErrorLabel.setText("");
         }
