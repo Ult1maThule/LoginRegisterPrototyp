@@ -34,9 +34,6 @@ public class RegisterController {
     private boolean errorAlertExecuted = false;
 
 
-
-
-
     public void initialize(){
         checkNameFormat(firstnameTextfield);
         checkNameFormat(lastnameTextfield);
