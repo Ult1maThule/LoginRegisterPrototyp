@@ -58,11 +58,18 @@ public class RegisterController {
     @FXML
     private TextField firstnameTextfield;
 
+    @FXML
+    private TextField showPasswordTextfield;
+
+    @FXML
+    private TextField showConfirmPasswordTextfield;
+
 
 
     public void initialize(){
         checkNameFormat(firstnameTextfield);
         checkNameFormat(lastnameTextfield);
+        toggleVisiblePassword(null);
     }
 
     @FXML
@@ -83,7 +90,26 @@ public class RegisterController {
             }
         });
     }
-
+    @FXML
+    public void toggleVisiblePassword(ActionEvent event) {
+        if (showPasswordCheckBox.isSelected()) {
+            showPasswordTextfield.setText(setPasswordfield.getText());
+            showPasswordTextfield.setVisible(true);
+            setPasswordfield.setVisible(false);
+            //nochmal für das zweite Passwortfeld
+            showConfirmPasswordTextfield.setText(confirmPasswordfield.getText());
+            showConfirmPasswordTextfield.setVisible(true);
+            confirmPasswordfield.setVisible(false);
+            return;
+        }
+        setPasswordfield.setText(showPasswordTextfield.getText());
+        setPasswordfield.setVisible(true);
+        showPasswordTextfield.setVisible(false);
+        //nochmal für das zweite Passwortfeld
+        confirmPasswordfield.setText(showConfirmPasswordTextfield.getText());
+        confirmPasswordfield.setVisible(true);
+        showConfirmPasswordTextfield.setVisible(false);
+    }
     private void checkUsernameAvailability(TextField name){
         name.textProperty().addListener(new ChangeListener<String>() {
             @Override

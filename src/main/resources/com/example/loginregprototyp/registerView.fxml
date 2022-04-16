@@ -25,8 +25,10 @@
       <TextField fx:id="usernameTextfield" alignment="CENTER" layoutX="25.0" layoutY="200.0" prefHeight="25.0" prefWidth="350.0" promptText="Username" />
       <TextField fx:id="emailTextfield" alignment="CENTER" layoutX="25.0" layoutY="250.0" prefHeight="25.0" prefWidth="350.0" promptText="Email" />
       <PasswordField fx:id="setPasswordfield" layoutX="25.0" layoutY="300.0" prefHeight="25.0" prefWidth="150.0" promptText="Passwort" />
+      <TextField fx:id="showPasswordTextfield" layoutX="25.0" layoutY="300.0" prefHeight="25.0" prefWidth="150.0" />
       <PasswordField fx:id="confirmPasswordfield" layoutX="225.0" layoutY="300.0" prefHeight="25.0" prefWidth="150.0" promptText="Passwort bestätigen" />
-      <CheckBox fx:id="showPasswordCheckBox" layoutX="25.0" layoutY="325.0" mnemonicParsing="false" text="Passwort anzeigen" />
+      <TextField fx:id="showConfirmPasswordTextfield" layoutX="225.0" layoutY="300.0" prefHeight="25.0" prefWidth="150.0"  />
+      <CheckBox fx:id="showPasswordCheckBox" layoutX="25.0" layoutY="325.0" mnemonicParsing="false" onAction="#toggleVisiblePassword" text="Passwort anzeigen" />
       <Button fx:id="continueButton" layoutX="175.0" layoutY="437.0" mnemonicParsing="false" onAction="#onContinueButtonEvent" text="Weiter" />
       <Label fx:id="usernameTakenLabel" layoutX="25.0" layoutY="225.0" textFill="RED" />
       <Label fx:id="nameErrorLabel" layoutX="24.0" layoutY="165.0" textFill="RED" />
