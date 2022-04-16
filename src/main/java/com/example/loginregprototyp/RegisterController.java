@@ -73,9 +73,8 @@ public class RegisterController {
 
         try{
             Connection con = DatabaseConnection.getConnection();
-            String insertFields = "insert into users(firstname,lastname, username, email, password) values "+""+"('";
-            String insertValues = a.getFirstname()+"','"+a.getLastname()+"','"+a.getUsername()+"','"+a.getEmail()+"','"+a.getPassword()+"')";
-            String insertToRegister= insertFields+insertValues;
+            String insertFields = "insert into users (firstname,lastname, username, email, password) values "+""+"('"+a.getFirstname()+"','"+a.getLastname()+"','"+a.getUsername()+"','"+a.getEmail()+"','"+a.getPassword()+"')";
+            String insertToRegister= insertFields;
             Statement Insert = con.createStatement();
             Insert.execute(insertToRegister);
             Insert.close();
@@ -218,7 +217,7 @@ public class RegisterController {
             if (rs.next()) {
 
             } else {
-               emailTakenError.setText("Die Email-Addresse ist bereits vergeben");
+              // emailTakenError.setText("Die Email-Addresse ist bereits vergeben");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -239,7 +238,7 @@ public class RegisterController {
             if (rs.next()) {
 
             } else {
-                usernameTakenLabel.setText("Der Username ist bereits vergeben");
+              //  usernameTakenLabel.setText("Der Username ist bereits vergeben");
             }
         } catch (Exception e) {
             e.printStackTrace();
