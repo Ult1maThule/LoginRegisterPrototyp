@@ -75,5 +75,28 @@ public class RegisterController {
         });
     }
 
+    private void checkUsernameAvailability(TextField name){
+        name.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            //Datenbank prüfe ob username schon existiert--> neue Methode
+                usernameTakenLabel.setText("Der Username wird bereits verwendet !");
+
+            }
+        });
+    }
+
+    private void checkEmailAvailabilityAndRights(TextField name){
+        name.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+               //Datenbank: prüfe ob existiert --> neue Methode
+                emailTakenError.setText("Die E-Mail-Adresse wird bereits verwendet !");
+                //Datenbank: prüfe ob Email auf Whitelist
+                adminBestätigungLabel.setText("Hinweis: Sie melden sich als ein Admin an");
+            }
+        });
+    }
+
 }
 

@@ -28,10 +28,10 @@
       <PasswordField fx:id="confirmPasswordfield" layoutX="225.0" layoutY="300.0" prefHeight="25.0" prefWidth="150.0" promptText="Passwort bestätigen" />
       <CheckBox fx:id="showPasswordCheckBox" layoutX="25.0" layoutY="325.0" mnemonicParsing="false" text="Passwort anzeigen" />
       <Button fx:id="continueButton" layoutX="175.0" layoutY="437.0" mnemonicParsing="false" text="Weiter" />
-      <Label fx:id="usernameTakenLabel" layoutX="25.0" layoutY="225.0" text="Der Username wird bereits verwendet !" textFill="RED" />
+      <Label fx:id="usernameTakenLabel" layoutX="25.0" layoutY="225.0"  textFill="RED" />
       <Label fx:id="nameErrorLabel" layoutX="24.0" layoutY="165.0" textFill="RED" />
-      <Label fx:id="emailTakenError" layoutX="25.0" layoutY="275.0" text="Die E-Mail-Adresse wird bereits verwendet !" textFill="RED" />
+      <Label fx:id="emailTakenError" layoutX="25.0" layoutY="275.0" textFill="RED" />
       <Label fx:id="passwordErrorLabel" layoutX="233.0" layoutY="325.0" text="Keine Übereinstimmung !" textFill="RED" />
-      <Label fx:id="adminBestätigungLabel" layoutX="90.0" layoutY="487.0" text="Hinweis: Sie melden sich als ein Admin an" textFill="#ffbf00" />
+      <Label fx:id="adminBestätigungLabel" layoutX="90.0" layoutY="487.0"  textFill="#ffbf00" />
    </children>
 </AnchorPane>
