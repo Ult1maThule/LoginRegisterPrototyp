@@ -57,44 +57,35 @@ public class RegisterController {
 
 
 
-    public void initialize(){
+    public void initialize() {
        checkNameFormat(firstnameTextfield);
        checkNameFormat(lastnameTextfield);
     }
 
-    private void checkNameFormat(TextField name){
-        name.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(!name.getText().matches("[a-zA-Z]+")){
-                    nameErrorLabel.setText("Haben Sie Ihren Namen richtig eingegeben?");
-                } else {
-                    nameErrorLabel.setText(" ");
-                }
+    private void checkNameFormat(TextField name) {
+        name.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!name.getText().matches("[a-zA-Z]+")) {
+                nameErrorLabel.setText("Haben Sie Ihren Namen richtig eingegeben?");
+            } else {
+                nameErrorLabel.setText(" ");
             }
         });
     }
 
-    private void checkUsernameAvailability(TextField name){
-        name.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+    private void checkUsernameAvailability(TextField name) {
+        name.textProperty().addListener((observable, oldValue, newValue) -> {
             //Datenbank prüfe ob username schon existiert--> neue Methode
-                usernameTakenLabel.setText("Der Username wird bereits verwendet !");
+            usernameTakenLabel.setText("Dieser Benutzername ist bereits vergeben!");
 
-            }
         });
     }
 
-    private void checkEmailAvailabilityAndRights(TextField name){
-        name.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-               //Datenbank: prüfe ob existiert --> neue Methode
-                emailTakenError.setText("Die E-Mail-Adresse wird bereits verwendet !");
-                //Datenbank: prüfe ob Email auf Whitelist
-                adminBestätigungLabel.setText("Hinweis: Sie melden sich als ein Admin an");
-            }
+    private void checkEmailAvailabilityAndRights(TextField name) {
+        name.textProperty().addListener((observable, oldValue, newValue) -> {
+           //Datenbank: prüfe ob existiert --> neue Methode
+            emailTakenError.setText("Diese E-Mail-Adresse wird bereits verwendet!");
+            //Datenbank: prüfe ob Email auf Whitelist
+            adminBestätigungLabel.setText("Hinweis: Sie melden sich als Administrator an");
         });
     }
 
