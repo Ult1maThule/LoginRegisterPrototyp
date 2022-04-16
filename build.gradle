@@ -3,6 +3,7 @@ plugins {
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'org.beryx.jlink' version '2.24.1'
+
 }
 
 group 'com.example'
@@ -25,7 +26,7 @@ tasks.withType(JavaCompile) {
 
 application {
     mainModule = 'com.example.loginregprototyp'
-    mainClass = 'com.example.loginregprototyp.HelloApplication'
+    mainClass = 'com.example.loginregprototyp.Main'
 }
 
 javafx {
