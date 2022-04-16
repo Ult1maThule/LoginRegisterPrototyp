@@ -40,12 +40,14 @@ public class RegisterController {
         toggleVisiblePassword(null);
         checkEmailAvailabilityAndRights(emailTextfield);
         checkUsernameAvailability(usernameTextfield);
+        checkPassword();
 
     }
 
     @FXML
     public void onContinueButtonEvent(ActionEvent event) {
-            errorAlert();
+
+        errorAlert();
             if(!errorAlertExecuted){
                String firstname = firstnameTextfield.getText();
                String lastname  = lastnameTextfield.getText();
@@ -59,15 +61,7 @@ public class RegisterController {
             }
 
     }
-    @FXML
-    public void comparePassword(ActionEvent Event) {
-        if(setPasswordfield.getText().equals(confirmPasswordfield.getText())&& showPasswordTextfield.getText().equals(showConfirmPasswordTextfield.getText())){
-            passwordErrorLabel.setText("");
-        }
-        else{
-            passwordErrorLabel.setText("Keine Übereinstimmung !");
-        }
-    }
+
 
     public void registerAdmin(Admin a)  {
 
@@ -84,7 +78,20 @@ public class RegisterController {
             e.printStackTrace();
         }
     }
+    private void checkPassword(){
+        confirmPasswordfield.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
+                    if (setPasswordfield.getText().equals(confirmPasswordfield.getText()) && showPasswordTextfield.getText().equals(showConfirmPasswordTextfield.getText())) {
+                        passwordErrorLabel.setText("");
+                    }else {
+                        passwordErrorLabel.setText("Keine Übereinstimmung !");
+                    }
+
+            }
+        });
+    }
     private void checkNameFormat(TextField name){
         name.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -93,6 +100,7 @@ public class RegisterController {
                     nameErrorLabel.setText("Haben Sie Ihren Namen richtig eingegeben?");
                 } else {
                     nameErrorLabel.setText("");
+
                 }
             }
         });
