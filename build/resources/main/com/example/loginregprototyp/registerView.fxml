@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.loginregprototyp.RegisterController">
+   <children>
+      <Label layoutX="131.0" layoutY="41.0" text="Projektname">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="69.0" layoutY="77.0" text="Erstellen Sie ein neues Projektname-Konto">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="firstnameTextfield" layoutX="25.0" layoutY="140.0" prefHeight="25.0" prefWidth="150.0" promptText="Vorname" />
+      <TextField fx:id="lastnameTextfield" layoutX="225.0" layoutY="140.0" prefHeight="25.0" prefWidth="150.0" promptText="Nachname" />
+      <TextField fx:id="usernameTextfield" alignment="CENTER" layoutX="25.0" layoutY="200.0" prefHeight="25.0" prefWidth="350.0" promptText="Username" />
+      <TextField fx:id="emailTextfield" alignment="CENTER" layoutX="25.0" layoutY="250.0" prefHeight="25.0" prefWidth="350.0" promptText="Email" />
+      <PasswordField fx:id="setPasswordfield" layoutX="25.0" layoutY="300.0" prefHeight="25.0" prefWidth="150.0" promptText="Passwort" />
+      <PasswordField fx:id="confirmPasswordfield" layoutX="225.0" layoutY="300.0" prefHeight="25.0" prefWidth="150.0" promptText="Passwort bestätigen" />
+      <CheckBox fx:id="showPasswordCheckBox" layoutX="25.0" layoutY="325.0" mnemonicParsing="false" text="Passwort anzeigen" />
+      <Button fx:id="continueButton" layoutX="175.0" layoutY="437.0" mnemonicParsing="false" text="Weiter" />
+      <Label fx:id="usernameTakenLabel" layoutX="25.0" layoutY="225.0"  textFill="RED" />
+      <Label fx:id="nameErrorLabel" layoutX="24.0" layoutY="165.0" textFill="RED" />
+      <Label fx:id="emailTakenError" layoutX="25.0" layoutY="275.0" textFill="RED" />
+      <Label fx:id="passwordErrorLabel" layoutX="233.0" layoutY="325.0" text="Keine Übereinstimmung !" textFill="RED" />
+      <Label fx:id="adminBestätigungLabel" layoutX="90.0" layoutY="487.0"  textFill="#ffbf00" />
+   </children>
+</AnchorPane>
