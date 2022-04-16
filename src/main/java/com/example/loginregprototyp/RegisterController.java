@@ -55,6 +55,7 @@ public class RegisterController {
                Admin a = new Admin(firstname,lastname,username,email,password);
                registerAdmin(a);
                successAlert();
+
             }
 
     }

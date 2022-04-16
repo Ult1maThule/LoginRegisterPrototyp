@@ -5,6 +5,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class Alerts {
+    // Register Alerts
     // Login Alerts
     public static void giveSQLAlert() {
         Alert sqlconnectionError = new Alert(Alert.AlertType.ERROR);
