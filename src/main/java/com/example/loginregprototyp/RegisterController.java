@@ -69,7 +69,7 @@ public class RegisterController {
     public void initialize(){
         checkNameFormat(firstnameTextfield);
         checkNameFormat(lastnameTextfield);
-        toggleVisiblePassword(null);
+
     }
 
     @FXML
