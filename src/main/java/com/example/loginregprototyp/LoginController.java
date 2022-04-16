@@ -30,13 +30,18 @@ public class LoginController {
     public void onDoneButtonEvent(ActionEvent event) {
         try {
             if (verifyTextFields()) {
-                giveEmptyTextfieldAlert();
+                Alerts.giveEmptyTextfieldAlert(username_textfield, password_textfield);
             } else if (usernameCheck(username_textfield.getText())) {
-                giveWrongUsernameAlert();
+                Alerts.giveWrongUsernameAlert(username_textfield);
             } else if (passwordCheck(password_textfield.getText())) {
-                giveWrongPasswordAlert();
+                Alerts.giveWrongPasswordAlert(password_textfield);
             } else {
-                //TODO Weiterleitung zur Mainpage
+                FXMLLoader fxmlLoader = new FXMLLoader(MainpageFXController.class.getResource("mainpageView.fxml"));
+                Stage loginStage = (Stage) done_button.getScene().getWindow();
+                Stage mainpageStage = new Stage();
+                mainpageStage.setScene(new Scene(fxmlLoader.load()));
+                loginStage.close();
+                mainpageStage.show();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,41 +58,6 @@ public class LoginController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void giveSQLAlert() {
-        Alert sqlconnectionError = new Alert(Alert.AlertType.ERROR);
-        sqlconnectionError.setHeaderText("Fehler beim Verbinden mit Datenbank!");
-        sqlconnectionError.setContentText("Überprüfen Sie die Verbindung zur Datenbank auf Fehler!");
-        sqlconnectionError.showAndWait();
-    }
-
-    private void giveEmptyTextfieldAlert() {
-        Alert emptyFieldAlert = new Alert(Alert.AlertType.ERROR);
-        emptyFieldAlert.setHeaderText("Ein oder mehrere Felder sind leer!");
-        emptyFieldAlert.setContentText("Bitte alle Felder ausfüllen!");
-        emptyFieldAlert.showAndWait();
-
-        username_textfield.clear();
-        password_textfield.clear();
-    }
-
-    private void giveWrongUsernameAlert() {
-        Alert wrongUsernameAlert = new Alert(Alert.AlertType.ERROR);
-        wrongUsernameAlert.setHeaderText("Falscher Benutzername!");
-        wrongUsernameAlert.setContentText("Benutzername nicht gefunden, bitte erneut eintragen!");
-        wrongUsernameAlert.showAndWait();
-
-        username_textfield.clear();
-    }
-
-    private void giveWrongPasswordAlert() {
-        Alert wrongPasswordAlert = new Alert(Alert.AlertType.ERROR);
-        wrongPasswordAlert.setHeaderText("Falsches Passwort!");
-        wrongPasswordAlert.setContentText("Benutzername nicht gefunden, bitte erneut eintragen!");
-        wrongPasswordAlert.showAndWait();
-
-        password_textfield.clear();
     }
 
     private boolean verifyTextFields() {
@@ -118,7 +88,7 @@ public class LoginController {
                 wrong_username = false;
             }
         } catch (SQLException e) {
-            giveSQLAlert();
+            Alerts.giveSQLAlert();
         }
 
         return wrong_username;
@@ -140,7 +110,7 @@ public class LoginController {
                 wrong_password = false;
             }
         } catch (SQLException e) {
-            giveSQLAlert();
+            Alerts.giveSQLAlert();
         }
 
         return wrong_password;
