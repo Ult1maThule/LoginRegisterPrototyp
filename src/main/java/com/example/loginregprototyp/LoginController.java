@@ -30,13 +30,14 @@ public class LoginController {
     public void onDoneButtonEvent(ActionEvent event) {
         try {
             if (verifyTextFields()) {
-
+                giveEmptyTextfieldAlert();
+            } else if (usernameCheck(username_textfield.getText())) {
+                giveWrongUsernameAlert();
+            } else if (passwordCheck(password_textfield.getText())) {
+                giveWrongPasswordAlert();
+            } else {
+                //TODO Weiterleitung zur Mainpage
             }
-
-            usernameCheck(username_textfield.getText());
-            passwordCheck(password_textfield.getText());
-
-            //TODO Weiterleitung zur Mainpage
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,7 +63,31 @@ public class LoginController {
     }
 
     private void giveEmptyTextfieldAlert() {
+        Alert emptyFieldAlert = new Alert(Alert.AlertType.ERROR);
+        emptyFieldAlert.setHeaderText("Ein oder mehrere Felder sind leer!");
+        emptyFieldAlert.setContentText("Bitte alle Felder ausfüllen!");
+        emptyFieldAlert.showAndWait();
 
+        username_textfield.clear();
+        password_textfield.clear();
+    }
+
+    private void giveWrongUsernameAlert() {
+        Alert wrongUsernameAlert = new Alert(Alert.AlertType.ERROR);
+        wrongUsernameAlert.setHeaderText("Falscher Benutzername!");
+        wrongUsernameAlert.setContentText("Benutzername nicht gefunden, bitte erneut eintragen!");
+        wrongUsernameAlert.showAndWait();
+
+        username_textfield.clear();
+    }
+
+    private void giveWrongPasswordAlert() {
+        Alert wrongPasswordAlert = new Alert(Alert.AlertType.ERROR);
+        wrongPasswordAlert.setHeaderText("Falsches Passwort!");
+        wrongPasswordAlert.setContentText("Benutzername nicht gefunden, bitte erneut eintragen!");
+        wrongPasswordAlert.showAndWait();
+
+        password_textfield.clear();
     }
 
     private boolean verifyTextFields() {
@@ -72,13 +97,6 @@ public class LoginController {
 
         if (username.equals("") || password.equals("")) {
             textfield_empty = true;
-            Alert emptyFieldAlert = new Alert(Alert.AlertType.ERROR);
-            emptyFieldAlert.setHeaderText("Ein oder mehrere Felder sind leer!");
-            emptyFieldAlert.setContentText("Bitte alle Felder ausfüllen!");
-            emptyFieldAlert.showAndWait();
-
-            username_textfield.clear();
-            password_textfield.clear();
         }
 
         return textfield_empty;
@@ -98,13 +116,6 @@ public class LoginController {
 
             if (rs.next()) {
                 wrong_username = false;
-            } else {
-                Alert wrongUsernameAlert = new Alert(Alert.AlertType.ERROR);
-                wrongUsernameAlert.setHeaderText("Falscher Benutzername!");
-                wrongUsernameAlert.setContentText("Benutzername nicht gefunden, bitte erneut eintragen!");
-                wrongUsernameAlert.showAndWait();
-
-                username_textfield.clear();
             }
         } catch (SQLException e) {
             giveSQLAlert();
@@ -127,13 +138,6 @@ public class LoginController {
 
             if (rs.next()) {
                 wrong_password = false;
-            } else {
-                Alert wrongPasswordAlert = new Alert(Alert.AlertType.ERROR);
-                wrongPasswordAlert.setHeaderText("Falsches Passwort!");
-                wrongPasswordAlert.setContentText("Benutzername nicht gefunden, bitte erneut eintragen!");
-                wrongPasswordAlert.showAndWait();
-
-                password_textfield.clear();
             }
         } catch (SQLException e) {
             giveSQLAlert();
