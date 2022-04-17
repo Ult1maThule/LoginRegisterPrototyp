@@ -38,11 +38,25 @@ dependencies {
     implementation ('mysql:mysql-connector-java:8.0.28')
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
+    runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:win"
+    runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:linux"
+    runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:mac"
 }
 
 test {
     useJUnitPlatform()
 }
+mainClassName = 'Launcher'
+jar{
+    manifest {
+        attributes ("Main-Class" : mainClassName)
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+jar { duplicatesStrategy(DuplicatesStrategy.EXCLUDE)}
 
 jlink {
     imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
