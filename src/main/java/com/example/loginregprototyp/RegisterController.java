@@ -61,50 +61,6 @@ public class RegisterController {
             }
 
     }
-
-
-    public void registerAdmin(Admin a)  {
-
-
-        try{
-            Connection con = DatabaseConnection.getConnection();
-            String insertFields = "insert into users (firstname,lastname, username, email, password) values "+""+"('"+a.getFirstname()+"','"+a.getLastname()+"','"+a.getUsername()+"','"+a.getEmail()+"','"+a.getPassword()+"')";
-            String insertToRegister= insertFields;
-            Statement Insert = con.createStatement();
-            Insert.execute(insertToRegister);
-            Insert.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-    private void checkPassword(){
-        confirmPasswordfield.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-
-                    if (setPasswordfield.getText().equals(confirmPasswordfield.getText()) && showPasswordTextfield.getText().equals(showConfirmPasswordTextfield.getText())) {
-                        passwordErrorLabel.setText("");
-                    }else {
-                        passwordErrorLabel.setText("Keine Übereinstimmung !");
-                    }
-
-            }
-        });
-    }
-    private void checkNameFormat(TextField name,TextField name2){
-        name.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(!name.getText().matches("[a-zA-Z]+")||!name2.getText().matches("[a-zA-Z]+")){
-                    nameErrorLabel.setText("Haben Sie Ihren Namen richtig eingegeben?");
-                } else {
-                    nameErrorLabel.setText("");
-
-                }
-            }
-        });
-    }
     @FXML
     public void toggleVisiblePassword(ActionEvent event) {
         if (showPasswordCheckBox.isSelected()) {
@@ -125,43 +81,33 @@ public class RegisterController {
         confirmPasswordfield.setVisible(true);
         showConfirmPasswordTextfield.setVisible(false);
     }
-    private void checkUsernameAvailability(TextField name){
-        name.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                //Datenbank prüfe ob username schon existiert--> neue Methode
-                try {
-                    usernameCheck(name.getText());
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+
+    public void registerAdmin(Admin a)  {
+
+
+        try{
+            Connection con = DatabaseConnection.getConnection();
+            String insertFields = "insert into users (firstname,lastname, username, email, password) values "+""+"('"+a.getFirstname()+"','"+a.getLastname()+"','"+a.getUsername()+"','"+a.getEmail()+"','"+a.getPassword()+"')";
+            String insertToRegister= insertFields;
+            Statement Insert = con.createStatement();
+            Insert.execute(insertToRegister);
+            Insert.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
-    private void checkEmailAvailabilityAndRights(TextField name){
-        name.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                //prüfe on Email stimmt
-                String pattern = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-                if(Pattern.compile(pattern).matcher(name.getText()).matches()){
-                emailTakenError.setText("");
-                    try {
-                        emailCheck(name.getText());
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    emailTakenError.setText("Dies ist keine gültige E-Mail Addresse !");
-                }
-                //Datenbank: prüfe ob existiert --> neue Methode
-               // emailTakenError.setText("Die E-Mail-Adresse wird bereits verwendet !");
 
-                //Datenbank: prüfe ob Email auf Whitelist
-                //adminBestätigungLabel.setText("Hinweis: Sie melden sich als ein Admin an");
-            }
-        });
+    private void errorAlert(){
+        if(isEmptyField(firstnameTextfield)||isEmptyField(lastnameTextfield)||isEmptyField(usernameTextfield)||isEmptyField(emailTextfield)||isEmptyPasswordfield(setPasswordfield)||isEmptyPasswordfield(confirmPasswordfield)){
+            errorAlertExecuted=true;
+            Alerts.emptyFieldsAlert();
+        } else if(checkErrormessage(usernameTakenLabel)||checkErrormessage(emailTakenError)||checkErrormessage(nameErrorLabel)||checkErrormessage(passwordErrorLabel)||checkErrormessage(usernameTakenLabel)){
+            errorAlertExecuted=true;
+            Alerts.errorMessagesOpenAlert();
+
+        }
     }
 
     private boolean isEmptyField(TextField field){
@@ -185,18 +131,74 @@ public class RegisterController {
         return false;
     }
 
-    private void errorAlert(){
-        if(isEmptyField(firstnameTextfield)||isEmptyField(lastnameTextfield)||isEmptyField(usernameTextfield)||isEmptyField(emailTextfield)||isEmptyPasswordfield(setPasswordfield)||isEmptyPasswordfield(confirmPasswordfield)){
-            errorAlertExecuted=true;
-            Alerts.emptyFieldsAlert();
-        } else if(checkErrormessage(usernameTakenLabel)||checkErrormessage(emailTakenError)||checkErrormessage(nameErrorLabel)||checkErrormessage(passwordErrorLabel)||checkErrormessage(usernameTakenLabel)){
-            errorAlertExecuted=true;
-            Alerts.errorMessagesOpenAlert();
 
-        }
+    private void checkUsernameAvailability(TextField name){
+        name.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                //Datenbank prüfe ob username schon existiert--> neue Methode
+                try {
+                    usernameCheck(name.getText());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
+    private void checkEmailAvailabilityAndRights(TextField name){
+        name.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                //prüfe on Email stimmt
+                String pattern = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+                if(Pattern.compile(pattern).matcher(name.getText()).matches()){
+                    emailTakenError.setText("");
+                    try {
+                        emailCheck(name.getText());
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    emailTakenError.setText("Dies ist keine gültige E-Mail Addresse !");
+                }
+                //Datenbank: prüfe ob existiert --> neue Methode
+                // emailTakenError.setText("Die E-Mail-Adresse wird bereits verwendet !");
 
+                //Datenbank: prüfe ob Email auf Whitelist
+                //adminBestätigungLabel.setText("Hinweis: Sie melden sich als ein Admin an");
+            }
+        });
+    }
+
+    private void checkPassword(){
+        confirmPasswordfield.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+
+                if (setPasswordfield.getText().equals(confirmPasswordfield.getText()) && showPasswordTextfield.getText().equals(showConfirmPasswordTextfield.getText())) {
+                    passwordErrorLabel.setText("");
+                }else {
+                    passwordErrorLabel.setText("Keine Übereinstimmung !");
+                }
+
+            }
+        });
+    }
+
+    private void checkNameFormat(TextField name,TextField name2){
+        name.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(!name.getText().matches("[a-zA-Z]+")||!name2.getText().matches("[a-zA-Z]+")){
+                    nameErrorLabel.setText("Haben Sie Ihren Namen richtig eingegeben?");
+                } else {
+                    nameErrorLabel.setText("");
+
+                }
+            }
+        });
+    }
 
     private void emailCheck(String email) throws SQLException {
         Connection con = DatabaseConnection.getConnection();
