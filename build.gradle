@@ -47,7 +47,7 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-mainClassName = 'Launcher'
+mainClassName = 'com.example.loginregprototyp.Launcher'
 jar{
     manifest {
         attributes ("Main-Class" : mainClassName)
