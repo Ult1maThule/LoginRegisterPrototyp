@@ -35,8 +35,8 @@ public class RegisterController {
 
 
     public void initialize(){
-        checkNameFormat(firstnameTextfield);
-        checkNameFormat(lastnameTextfield);
+        checkNameFormat(firstnameTextfield,lastnameTextfield);
+        checkNameFormat(lastnameTextfield,firstnameTextfield);
         toggleVisiblePassword(null);
         checkEmailAvailabilityAndRights(emailTextfield);
         checkUsernameAvailability(usernameTextfield);
@@ -92,11 +92,11 @@ public class RegisterController {
             }
         });
     }
-    private void checkNameFormat(TextField name){
+    private void checkNameFormat(TextField name,TextField name2){
         name.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(!name.getText().matches("[a-zA-Z]+")){
+                if(!name.getText().matches("[a-zA-Z]+")||!name2.getText().matches("[a-zA-Z]+")){
                     nameErrorLabel.setText("Haben Sie Ihren Namen richtig eingegeben?");
                 } else {
                     nameErrorLabel.setText("");
