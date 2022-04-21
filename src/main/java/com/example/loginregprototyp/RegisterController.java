@@ -58,6 +58,8 @@ public class RegisterController {
                registerAdmin(a);
                Alerts.successAlert(continueButton);
 
+            } else {
+                errorAlertExecuted=false;
             }
 
     }
@@ -100,14 +102,16 @@ public class RegisterController {
 
 
     private void errorAlert(){
-        if(isEmptyField(firstnameTextfield)||isEmptyField(lastnameTextfield)||isEmptyField(usernameTextfield)||isEmptyField(emailTextfield)||isEmptyPasswordfield(setPasswordfield)||isEmptyPasswordfield(confirmPasswordfield)){
+        if(isEmptyField(firstnameTextfield)||isEmptyField(lastnameTextfield)||isEmptyField(usernameTextfield)||isEmptyField(emailTextfield)||isEmptyPasswordfield(setPasswordfield)||isEmptyPasswordfield(confirmPasswordfield)||isEmptyField(showPasswordTextfield)||isEmptyField(showConfirmPasswordTextfield)){
             errorAlertExecuted=true;
             Alerts.emptyFieldsAlert();
+
         } else if(checkErrormessage(usernameTakenLabel)||checkErrormessage(emailTakenError)||checkErrormessage(nameErrorLabel)||checkErrormessage(passwordErrorLabel)||checkErrormessage(usernameTakenLabel)){
             errorAlertExecuted=true;
             Alerts.errorMessagesOpenAlert();
 
         }
+
     }
 
     private boolean isEmptyField(TextField field){
