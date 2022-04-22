@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public class RegisterController {
 
     @FXML
-    private Button continueButton;
+    private Button continueButton, backToLoginButton;
 
     @FXML
     private Label emailTakenError, nameErrorLabel, passwordErrorLabel, usernameTakenLabel, adminBestätigungLabel;
@@ -82,6 +82,12 @@ public class RegisterController {
         confirmPasswordfield.setText(showConfirmPasswordTextfield.getText());
         confirmPasswordfield.setVisible(true);
         showConfirmPasswordTextfield.setVisible(false);
+    }
+
+    @FXML
+    public void onBackToLoginButtonEvent() {
+        Stage stage = (Stage) continueButton.getScene().getWindow();
+        stage.close();
     }
 
     public void registerAdmin(Admin a)  {

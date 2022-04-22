@@ -48,7 +48,7 @@ test {
     useJUnitPlatform()
 }
 mainClassName = 'com.example.loginregprototyp.Launcher'
-jar{
+/*jar{
     manifest {
         attributes ("Main-Class" : mainClassName)
     }
@@ -56,7 +56,7 @@ jar{
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
-jar { duplicatesStrategy(DuplicatesStrategy.EXCLUDE)}
+jar { duplicatesStrategy(DuplicatesStrategy.EXCLUDE)}*/
 
 jlink {
     imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
