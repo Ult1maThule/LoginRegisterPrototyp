@@ -12,8 +12,7 @@ public class MainpageFXController {
 
     @FXML
     void onCloseButtonAction(ActionEvent event) {
-        Stage stage = (Stage) closeMainpageButton.getScene().getWindow();
-        stage.close();
+        ((Stage) closeMainpageButton.getScene().getWindow()).close();
     }
 
 }

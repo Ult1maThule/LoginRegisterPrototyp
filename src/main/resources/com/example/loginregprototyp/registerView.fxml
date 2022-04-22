@@ -35,6 +35,6 @@
       <Label fx:id="emailTakenError" layoutX="25.0" layoutY="275.0" textFill="RED" />
       <Label fx:id="passwordErrorLabel" layoutX="233.0" layoutY="325.0" textFill="RED" />
       <Label fx:id="adminBestätigungLabel" layoutX="90.0" layoutY="487.0" textFill="#ffbf00" />
-      <Button fx:id="backToLoginButton" layoutX="24.0" layoutY="393.0" mnemonicParsing="false" onAction="#onBackToLoginButtonEvent" text="Zurück" />
+      <Button fx:id="backToLoginButton" layoutX="173.0" layoutY="549.0" mnemonicParsing="false" onAction="#onBackToLoginButtonEvent" text="Zurück" />
    </children>
 </AnchorPane>
