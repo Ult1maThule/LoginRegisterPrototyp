@@ -86,8 +86,7 @@ public class RegisterController {
 
     @FXML
     public void onBackToLoginButtonEvent() {
-        Stage stage = (Stage) continueButton.getScene().getWindow();
-        stage.close();
+        ((Stage) continueButton.getScene().getWindow()).close();
     }
 
     public void registerAdmin(Admin a)  {
