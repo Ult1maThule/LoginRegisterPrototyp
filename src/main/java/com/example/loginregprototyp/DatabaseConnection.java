@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
+    //Methode zur Datenbankverbindung
     public static Connection getConnection() throws SQLException {
         String database_url = "jdbc:mysql://localhost/userbase";
         String user_name = "root";

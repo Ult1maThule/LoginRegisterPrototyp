@@ -25,17 +25,21 @@ public class LoginController {
 
     @FXML
     private TextField username_textfield;
-
     @FXML
+    //Klicken des Bestätigen Buttons
     public void onDoneButtonEvent(ActionEvent event) {
         try {
+            //Wenn Textfelder leer sind
             if (verifyTextFields()) {
                 Alerts.giveEmptyTextfieldAlert(username_textfield, password_textfield);
+            //Wenn der Username falsch ist
             } else if (usernameCheck(username_textfield.getText())) {
                 Alerts.giveWrongUsernameAlert(username_textfield);
+            //Wenn das Passwort falsch ist
             } else if (passwordCheck(password_textfield.getText())) {
                 Alerts.giveWrongPasswordAlert(password_textfield);
             } else {
+            //Wenn alles richtig ist, wird die Mainpage geladen
                 FXMLLoader fxmlLoader = new FXMLLoader(MainpageFXController.class.getResource("mainpageView.fxml"));
                 Stage loginStage = (Stage) done_button.getScene().getWindow();
                 Stage mainpageStage = new Stage();
@@ -48,6 +52,7 @@ public class LoginController {
         }
     }
 
+    //Wenn der Registrierungs Button geklickt wird, wird die Registrierungsseite geladen
     @FXML
     public void onRegisterButtonEvent(ActionEvent event) {
         try {
@@ -59,7 +64,7 @@ public class LoginController {
             e.printStackTrace();
         }
     }
-
+    //Methoden zum checkem, ob Textfelder leer sind
     private boolean verifyTextFields() {
         String username = username_textfield.getText();
         String password = password_textfield.getText();
@@ -71,7 +76,7 @@ public class LoginController {
 
         return textfield_empty;
     }
-
+    //Methode zum checken, ob der Username falsch ist
     private boolean usernameCheck(String username) throws SQLException {
         Connection con = DatabaseConnection.getConnection();
         PreparedStatement ps;
@@ -93,7 +98,7 @@ public class LoginController {
 
         return wrong_username;
     }
-
+    //Methoden zum checken, ob das Passwort falsch ist
     private boolean passwordCheck(String password) throws SQLException {
         Connection con = DatabaseConnection.getConnection();
         PreparedStatement ps;
