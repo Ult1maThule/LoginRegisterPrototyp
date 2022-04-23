@@ -1,3 +1,4 @@
+//@author Liam Maurice Heimbach & Vinusan Sivalingam
 package com.example.loginregprototyp;
 
 import java.util.Date;
